@@ -5,7 +5,10 @@ const GameBoard = (function () {
   [" ", " ", " "],
   [" ", " ", " "]
 ];
-    function occupied(x, y) {
+
+var game_over = false;
+
+  function occupied(x, y) {
         if (gameboard[x][y] != ' ') {
             console.log(`gameboard[${x}][${y}] contains ${gameboard[x][y]}`);
             return true;
@@ -48,6 +51,86 @@ const GameBoard = (function () {
     gameboard[x][y] = XorO;
   }
 
+  function _column_equal(column) {
+    let temp = new Set();;
+    for (let row=0; row < 3; row++) {
+        temp.add(gameboard[row][column])
+    }
+    if (temp.size > 1) {
+        return false;
+    }
+    if (temp.has('X') || temp.has('O')) {
+        return true;
+    }
+    return false;
+  }
+
+function _diagonal_equal() {
+    let temp = new Set();
+
+    // first top left to bottom right
+    for (let i = 0; i < 3; i++) {
+        temp.add(gameboard[i][i]);
+    }
+    
+    if (temp.has('X') || temp.has('O')) {
+        if (temp.size == 1) {
+            return true;
+        }
+    }
+
+    temp.clear();
+
+    // Now top right to bottom left
+    for (let i=0; i<3; i++) {
+         for (let i = 0; i < 3; i++) {
+            temp.add(gameboard[i][2-i]);
+        }
+    }
+    if (temp.has('X') || temp.has('O')) {
+        if (temp.size == 1) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function _row_equal(row) {
+    let temp = new Set();;
+    for (let column=0; column < 3; column++) {
+        temp.add(gameboard[row][column])
+    }
+    if (temp.size > 1) {
+        return false;
+    }
+    if (temp.has('X') || temp.has('O')) {
+        return true;
+    }
+    return false;
+  }
+
+  function _check_for_line() {
+    // check columns
+    for (let column = 0; column < 3; column++) {
+       if (_column_equal(column))
+       {
+        return true;
+       }
+    } 
+    // check rows
+    for (let row = 0; row < 3; row++) {
+       if (_row_equal(row))
+       {
+        return true;
+       }
+    }
+    if (_diagonal_equal()) {
+        return true;
+    } 
+    return false;
+  }
+
   // Public API returned to the user
   return {
     add(XorO, x, y) {
@@ -58,6 +141,18 @@ const GameBoard = (function () {
             throw(RangeError("Invalid co=ordinates"));
         }
         return(gameboard[x][y]);
+    }, 
+    get_all() {
+        let retval=[];
+        for (let x=0; x<3; x++) {
+            for (let y = 0; y < 3; y++) {
+                retval.push(gameboard[x][y])
+            }
+        }
+        return(retval);
+    }, 
+    check_for_line() {
+        return(_check_for_line());
     }
   };
 })();
