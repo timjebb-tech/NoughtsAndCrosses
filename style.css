@@ -1,0 +1,25 @@
+.gameboard {
+  display: grid; /* Activates the grid layout engine */
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 columns of equal fraction width */
+  grid-template-rows: repeat(3, 1fr);    /* Creates 3 rows of equal fraction height */
+  gap: 10px; /* Specifies a 10px spacing between rows and columns */
+  width: 100%;
+  max-width: 450px; /* Optional constraint to keep the grid at a manageable size */
+  margin: 0 auto; /* Centers the grid container horizontally on the screen */
+}
+
+.grid-item {
+  background-color: #3498db;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            
+            aspect-ratio: 1 / 1; /* Forces height to strictly match width */
+
+            /* Centers text content perfectly inside the square */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+}

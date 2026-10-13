@@ -285,3 +285,33 @@ function test() {
         console.log(`game not over: go = ${go}`);
     }
 }
+
+
+// 1. Select the parent grid container
+const grid = document.getElementById('myGameboard');
+console.log(`grid = ${grid}`);
+
+// 2. Listen for clicks on the entire container
+grid.addEventListener('click', function(event) {
+  // 3. Ensure the clicked element is actually a grid item square
+  const clickedSquare = event.target.closest('.grid-item');
+  
+  // If the user clicked the gap between squares, ignore it
+  if (!clickedSquare) return;
+
+  // 4. Retrieve the unique index from the clicked element
+  const index = clickedSquare.getAttribute('data-index');
+
+  const row = Math.floor(index / 3);
+  const col = ((index - 1) % 3);
+
+  // 3. Pass both values to your game function
+  handleSquareClick(row, col, clickedSquare);
+});
+
+// Your updated game function
+function handleSquareClick(row, col, element) {
+  console.log(`Clicked at Row: ${row}, Column: ${col}`);
+  
+  // Your game logic goes here (e.g., gameBoard[row-1][col-1] = 'X')
+}
