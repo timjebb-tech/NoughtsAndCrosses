@@ -1,3 +1,9 @@
+const CROSS_CURSOR = "url('./images/alpha-x-icon.svg')";
+const NOUGHT_CURSOR = "url('./images/alpha-o-icon.svg')";
+
+let current_cursor = 'x';
+let zzz='wibble';
+
 const GameBoard = (function () {
   // Private variable (inaccessible from the outside)
   const gameboard=[
@@ -5,6 +11,10 @@ const GameBoard = (function () {
   [" ", " ", " "],
   [" ", " ", " "]
 ];
+
+
+
+
 
 let game_over = false;  // will contain false, 'X', or 'O'
 
@@ -309,9 +319,38 @@ grid.addEventListener('click', function(event) {
   handleSquareClick(row, col, clickedSquare);
 });
 
+
+
 // Your updated game function
 function handleSquareClick(row, col, element) {
   console.log(`Clicked at Row: ${row}, Column: ${col}`);
+  changeCursor();
   
   // Your game logic goes here (e.g., gameBoard[row-1][col-1] = 'X')
+}
+
+function changeCursor() {
+    console.log("In changeCursor()");
+    console.log(`In changeCursor(): zzz = ${zzz}`);
+    console.log(`In changeCursor(): current_cursor = ${current_cursor}`);
+    
+    if (current_cursor == 'x') {
+        //document.body.style.cursor = `${NOUGHT_CURSOR}, auto`;
+        
+        //const allElements = Array.from(document.body.getElementsByTagName('*'));
+        const allElements = Array.from(document.getElementsByClassName('grid-item'));
+        allElements.forEach(el => {
+            el.style.setProperty('cursor',`${NOUGHT_CURSOR}, auto`,'important');
+        });
+        current_cursor = 'o';
+    }
+    else {
+        //document.body.style.cursor = `${CROSS_CURSOR}, auto`;
+        //const allElements = Array.from(document.body.getElementsByTagName('*'));
+        const allElements = Array.from(document.getElementsByClassName('grid-item'));
+        allElements.forEach(el => {
+            el.style.setProperty('cursor',`${CROSS_CURSOR}, auto`,'important');
+        });
+        current_cursor = 'x';
+    }
 }
