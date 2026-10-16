@@ -25,10 +25,9 @@
 }
 
 
-body {
+
+
+#myGameboard{
     cursor: url('./images/alpha-x-icon.svg'), crosshair;
 }
 
-body *{
-    cursor: url('./images/alpha-x-icon.svg'), crosshair;
-}

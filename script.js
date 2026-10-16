@@ -324,15 +324,14 @@ grid.addEventListener('click', function(event) {
 // Your updated game function
 function handleSquareClick(row, col, element) {
   console.log(`Clicked at Row: ${row}, Column: ${col}`);
+
+
   changeCursor();
   
   // Your game logic goes here (e.g., gameBoard[row-1][col-1] = 'X')
 }
 
 function changeCursor() {
-    console.log("In changeCursor()");
-    console.log(`In changeCursor(): zzz = ${zzz}`);
-    console.log(`In changeCursor(): current_cursor = ${current_cursor}`);
     
     if (current_cursor == 'x') {
         //document.body.style.cursor = `${NOUGHT_CURSOR}, auto`;
@@ -354,3 +353,4 @@ function changeCursor() {
         current_cursor = 'x';
     }
 }
+
