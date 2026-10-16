@@ -1,3 +1,13 @@
+:root {
+  /* Default global asset path fallback */
+  --global-cursor: url('./images/alpha-x-icon.svg');
+}
+
+html, body {
+  cursor: var(--global-cursor), auto;
+}
+
+
 .gameboard {
   display: grid; /* Activates the grid layout engine */
   grid-template-columns: repeat(3, 1fr); /* Creates 3 columns of equal fraction width */
@@ -31,3 +41,24 @@
     cursor: url('./images/alpha-x-icon.svg'), crosshair;
 }
 
+.grid-item {
+  /* Keeps the global cursor style while navigating inside the grid item */
+  cursor: var(--global-cursor), auto; 
+}
+
+/* 3. Grey out the cursor when hovering over specific restricted grid items */
+.grid-item.disabled:hover {
+  /* Option A: Swap to a pre-greyscaled local image asset */
+  cursor: url('./assets/cursors/wand-grey.png'), not-allowed;
+
+  /* Option B: If you don't have a grey asset, use a native blocked icon */
+  /* cursor: not-allowed; */
+}
+
+/* .grid-item[data-state="clickable"]:hover {
+  cursor: pointer; 
+}
+
+.grid-item[data-state="disabled"]:hover {
+  cursor: not-allowed; 
+}  */

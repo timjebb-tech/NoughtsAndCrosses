@@ -1,7 +1,10 @@
 const CROSS_CURSOR = "url('./images/alpha-x-icon.svg')";
 const NOUGHT_CURSOR = "url('./images/alpha-o-icon.svg')";
 
-let current_cursor = 'x';
+const CURSOR_X = 'X';
+const CURSOR_O = 'O';
+
+let current_cursor = CURSOR_X;
 let zzz='wibble';
 
 const GameBoard = (function () {
@@ -11,10 +14,6 @@ const GameBoard = (function () {
   [" ", " ", " "],
   [" ", " ", " "]
 ];
-
-
-
-
 
 let game_over = false;  // will contain false, 'X', or 'O'
 
@@ -28,25 +27,25 @@ let next_turn = null;
         return false;
     }
 
-  function validate_coordinates(x, y) {
+  function _validate_coordinates(x, y) {
     if (x<0 ||x>2) {
-        console.log("Invalid x value");
+        console.log(`Invalid x value: ${x}`);
         return false;
     }
     if (y<0 || y>2) {
-        console.log("Invalid y value");
+        console.log(`Invalid y value: ${y}`);
         return false;
     }
     return true;
   }
 
-  function validate(XorO, x, y) {
-    if (!validate_coordinates(x, y)) {
+  function _validate(XorO, x, y) {
+    if (!_validate_coordinates(x, y)) {
         return false;
     }
 
-    if (XorO != 'X' && XorO != 'O') {
-        console.log("Must be X or O");
+    if (XorO != CURSOR_X && XorO != CURSOR_O) {
+        console.log(`Must be ${CURSOR_X} or ${CURSOR_O}`);
         return false;
     }
 
@@ -73,8 +72,8 @@ let next_turn = null;
     if (game_over) {
         throw Error("Game is over.  Please start a new game to continue playing")
     }
-    if (!validate(XorO, x, y)) {
-        return false;
+    if (!_validate(XorO, x, y)) {
+        throw Error("Validation failed");
     }
     if (next_turn == null) {
         next_turn = XorO;
@@ -312,8 +311,11 @@ grid.addEventListener('click', function(event) {
   // 4. Retrieve the unique index from the clicked element
   const index = clickedSquare.getAttribute('data-index');
 
+  console.log(`index = ${index}`)
   const row = Math.floor(index / 3);
-  const col = ((index - 1) % 3);
+  console.log(`row = ${row}`)
+  const col = ((index ) % 3);
+  console.log(`col = ${col}`)
 
   // 3. Pass both values to your game function
   handleSquareClick(row, col, clickedSquare);
@@ -323,34 +325,51 @@ grid.addEventListener('click', function(event) {
 
 // Your updated game function
 function handleSquareClick(row, col, element) {
-  console.log(`Clicked at Row: ${row}, Column: ${col}`);
-
-
-  changeCursor();
+    //is the square disabled?
+    if (element.dataset.state == "disabled")
+    {
+        // do nothing
+        return;
+    }
+    console.log(`Clicked at Row: ${row}, Column: ${col}`);
   
-  // Your game logic goes here (e.g., gameBoard[row-1][col-1] = 'X')
+    let add_result = GameBoard.add(current_cursor, row, col);
+
+    if (add_result)
+    {
+        alert(`Game over.  ${result} is the winner)`)
+    }
+    
+    // Update data-state to disabled
+    element.dataset.state="disabled";
+    
+    changeCursor();
+
+    // disable all buttons
 }
 
-function changeCursor() {
+function changeCursor(row, col, element) {
     
-    if (current_cursor == 'x') {
+    if (current_cursor == CURSOR_X) {
         //document.body.style.cursor = `${NOUGHT_CURSOR}, auto`;
         
         //const allElements = Array.from(document.body.getElementsByTagName('*'));
         const allElements = Array.from(document.getElementsByClassName('grid-item'));
         allElements.forEach(el => {
-            el.style.setProperty('cursor',`${NOUGHT_CURSOR}, auto`,'important');
+            el.style.setProperty('cursor',`${NOUGHT_CURSOR} 64, 64 auto`,'important');
         });
-        current_cursor = 'o';
+        current_cursor = CURSOR_O;
     }
     else {
         //document.body.style.cursor = `${CROSS_CURSOR}, auto`;
         //const allElements = Array.from(document.body.getElementsByTagName('*'));
         const allElements = Array.from(document.getElementsByClassName('grid-item'));
         allElements.forEach(el => {
-            el.style.setProperty('cursor',`${CROSS_CURSOR}, auto`,'important');
+            el.style.setProperty('cursor',`${CROSS_CURSOR} 64 64, auto`,'important');
         });
-        current_cursor = 'x';
+        current_cursor = CURSOR_X;
     }
+
+
 }
 
