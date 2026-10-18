@@ -1,6 +1,6 @@
 :root {
   /* Default global asset path fallback */
-  --global-cursor: url('./images/alpha-x-icon.svg');
+  /* --global-cursor: url('./images/alpha-o-icon.svg'); */
 }
 
 html, body {
@@ -41,10 +41,10 @@ html, body {
     cursor: url('./images/alpha-x-icon.svg'), crosshair;
 }
 
-.grid-item {
+/* .grid-item {
   /* Keeps the global cursor style while navigating inside the grid item */
   cursor: var(--global-cursor), auto; 
-}
+} */
 
 /* 3. Grey out the cursor when hovering over specific restricted grid items */
 .grid-item.disabled:hover {

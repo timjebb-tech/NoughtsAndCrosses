@@ -5,7 +5,6 @@ const CURSOR_X = 'X';
 const CURSOR_O = 'O';
 
 let current_cursor = CURSOR_X;
-let zzz='wibble';
 
 const GameBoard = (function () {
   // Private variable (inaccessible from the outside)
@@ -337,36 +336,52 @@ function handleSquareClick(row, col, element) {
 
     if (add_result)
     {
-        alert(`Game over.  ${result} is the winner)`)
+        alert(`Game over.  ${add_result} is the winner)`)
+        gameOver(add_result);
     }
-    
-    // Update data-state to disabled
-    element.dataset.state="disabled";
-    
-    changeCursor();
-
-    // disable all buttons
+    else{
+        // Update data-state to disabled
+        element.dataset.state="disabled";
+        
+        changeCursor();    
+    }
 }
 
-function changeCursor(row, col, element) {
-    
+function gameOver(winner) {
+    // disable all buttons
+    const allElements = Array.from(document.getElementsByClassName('grid-item'));
+    allElements.forEach(el => {
+        el.dataset.state="disabled";
+    });
+}
+
+function changeCursor() {
+    console.log("In changeCursor");
     if (current_cursor == CURSOR_X) {
+        console.log("In changeCursor 1");
         //document.body.style.cursor = `${NOUGHT_CURSOR}, auto`;
+
+        const gb = document.getElementById('myGameboard');
+        gb.style.setProperty('cursor',`${NOUGHT_CURSOR} 0 0, auto`,'important');
         
         //const allElements = Array.from(document.body.getElementsByTagName('*'));
-        const allElements = Array.from(document.getElementsByClassName('grid-item'));
-        allElements.forEach(el => {
-            el.style.setProperty('cursor',`${NOUGHT_CURSOR} 64, 64 auto`,'important');
-        });
+        // const allElements = Array.from(document.getElementsByClassName('grid-item'));
+        // allElements.forEach(el => {
+        //     el.style.setProperty('cursor',`${NOUGHT_CURSOR} 64 64, auto`,'important');
+        // });
         current_cursor = CURSOR_O;
     }
     else {
+        console.log("In changeCursorm 2");
         //document.body.style.cursor = `${CROSS_CURSOR}, auto`;
         //const allElements = Array.from(document.body.getElementsByTagName('*'));
-        const allElements = Array.from(document.getElementsByClassName('grid-item'));
-        allElements.forEach(el => {
-            el.style.setProperty('cursor',`${CROSS_CURSOR} 64 64, auto`,'important');
-        });
+        const gb = document.getElementById('myGameboard');
+        gb.style.setProperty('cursor',`${CROSS_CURSOR} 0 0, auto`,'important');
+        
+        // const allElements = Array.from(document.getElementsByClassName('grid-item'));
+        // allElements.forEach(el => {
+        //     el.style.setProperty('cursor',`${CROSS_CURSOR} 64 64, auto`,'important');
+        // });
         current_cursor = CURSOR_X;
     }
 
