@@ -244,7 +244,7 @@ function _row_equal(row) {
     check_game_over() {
         return(game_over);
     }, 
-    new_game() {
+    newGame() {
         _new_game();
     }
 
@@ -358,6 +358,18 @@ function gameOver(winner) {
     });
 }
 
+function newGame() {
+     const allElements = Array.from(document.getElementsByClassName('grid-item'));
+    allElements.forEach(el => {
+        el.dataset.state="clickable";
+        el.textContent = "";
+        GameBoard.newGame();
+    });
+
+    current_cursor = CURSOR_X;
+
+}
+
 function changeCursor() {
     console.log("In changeCursor");
     if (current_cursor == CURSOR_X) {
@@ -391,3 +403,9 @@ function changeCursor() {
 
 }
 
+const btn = document.getElementById("newGameButton");
+
+btn.addEventListener("click", () => {
+  console.log("New game button clicked");
+  newGame();
+});
