@@ -330,12 +330,15 @@ function handleSquareClick(row, col, element) {
         // do nothing
         return;
     }
+    else {
+        element.textContent = current_cursor;
+    }
     console.log(`Clicked at Row: ${row}, Column: ${col}`);
   
     let add_result = GameBoard.add(current_cursor, row, col);
 
     if (add_result)
-    {
+    {        
         alert(`Game over.  ${add_result} is the winner)`)
         gameOver(add_result);
     }
