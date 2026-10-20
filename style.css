@@ -38,18 +38,18 @@ html, body {
 
 
 #myGameboard{
-    cursor: url('./images/alpha-x-icon.svg'), crosshair;
+    cursor: url('./images/alpha-x-icon-red.svg'), crosshair;
 }
 
 /* .grid-item {
-  /* Keeps the global cursor style while navigating inside the grid item */
+  
   cursor: var(--global-cursor), auto; 
 } */
 
 /* 3. Grey out the cursor when hovering over specific restricted grid items */
-.grid-item.disabled:hover {
+.grid-item[data-state='disabled']:hover {
   /* Option A: Swap to a pre-greyscaled local image asset */
-  cursor: url('./assets/cursors/wand-grey.png'), not-allowed;
+  cursor: url('./images/alpha-o-icon-grey.svg'), not-allowed;
 
   /* Option B: If you don't have a grey asset, use a native blocked icon */
   /* cursor: not-allowed; */

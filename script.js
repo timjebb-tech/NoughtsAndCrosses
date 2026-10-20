@@ -1,5 +1,5 @@
-const CROSS_CURSOR = "url('./images/alpha-x-icon.svg')";
-const NOUGHT_CURSOR = "url('./images/alpha-o-icon.svg')";
+const CROSS_CURSOR = "url('./images/alpha-x-icon-red.svg')";
+const NOUGHT_CURSOR = "url('./images/alpha-o-icon-red.svg')";
 
 const CURSOR_X = 'X';
 const CURSOR_O = 'O';
@@ -339,8 +339,9 @@ function handleSquareClick(row, col, element) {
 
     if (add_result)
     {        
-        alert(`Game over.  ${add_result} is the winner)`)
+        changeCursor();         
         gameOver(add_result);
+
     }
     else{
         // Update data-state to disabled
@@ -356,6 +357,12 @@ function gameOver(winner) {
     allElements.forEach(el => {
         el.dataset.state="disabled";
     });
+    if (winner=="D") {
+        updateStatus(`Game over.  It was a draw`);
+    }
+    else {
+        updateStatus(`Game over.  ${winner} is the winner`);
+    }
 }
 
 function newGame() {
@@ -409,3 +416,8 @@ btn.addEventListener("click", () => {
   console.log("New game button clicked");
   newGame();
 });
+
+function updateStatus(status) {
+    st = document.getElementById("game-status");
+    st.textContent = status;
+}
