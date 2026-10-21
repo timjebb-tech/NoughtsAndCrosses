@@ -361,7 +361,15 @@ function gameOver(winner) {
         updateStatus(`Game over.  It was a draw`);
     }
     else {
-        updateStatus(`Game over.  ${winner} is the winner`);
+        let winnerText;
+        if (winner == 'X') {
+            winnerText = document.getElementById("x-player").value;
+        }
+        else {
+            winnerText = document.getElementById("o-player").value;
+        }
+
+        updateStatus(`Game over.  ${winnerText} is the winner`);
     }
 }
 
@@ -374,36 +382,21 @@ function newGame() {
     });
 
     current_cursor = CURSOR_X;
-
+    updateStatus("");
 }
 
 function changeCursor() {
-    console.log("In changeCursor");
-    if (current_cursor == CURSOR_X) {
+    console.log("In changeCursor");    if (current_cursor == CURSOR_X) {
         console.log("In changeCursor 1");
-        //document.body.style.cursor = `${NOUGHT_CURSOR}, auto`;
 
         const gb = document.getElementById('myGameboard');
         gb.style.setProperty('cursor',`${NOUGHT_CURSOR} 0 0, auto`,'important');
         
-        //const allElements = Array.from(document.body.getElementsByTagName('*'));
-        // const allElements = Array.from(document.getElementsByClassName('grid-item'));
-        // allElements.forEach(el => {
-        //     el.style.setProperty('cursor',`${NOUGHT_CURSOR} 64 64, auto`,'important');
-        // });
         current_cursor = CURSOR_O;
     }
     else {
-        console.log("In changeCursorm 2");
-        //document.body.style.cursor = `${CROSS_CURSOR}, auto`;
-        //const allElements = Array.from(document.body.getElementsByTagName('*'));
         const gb = document.getElementById('myGameboard');
         gb.style.setProperty('cursor',`${CROSS_CURSOR} 0 0, auto`,'important');
-        
-        // const allElements = Array.from(document.getElementsByClassName('grid-item'));
-        // allElements.forEach(el => {
-        //     el.style.setProperty('cursor',`${CROSS_CURSOR} 64 64, auto`,'important');
-        // });
         current_cursor = CURSOR_X;
     }
 

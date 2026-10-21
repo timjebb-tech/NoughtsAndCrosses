@@ -1,12 +1,53 @@
-:root {
-  /* Default global asset path fallback */
-  /* --global-cursor: url('./images/alpha-o-icon.svg'); */
-}
+
 
 html, body {
   cursor: var(--global-cursor), auto;
 }
 
+
+#newGameButton {
+  /* Size & Shape */
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 50px; /* Makes the button perfectly round/pill-shaped */
+  
+  /* Colors & Aesthetics */
+  background: linear-gradient(135deg, #8e2de2, #4a00e0); /* Vibrant purple gradient */
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  
+  /* Typography & Layout */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Depth & Smooth Animations */
+  box-shadow: 0 4px 15px rgba(114, 9, 183, 0.4); /* Purple tinted shadow */
+  transition: all 0.3s ease;
+  outline: none;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hover Effect: Lifts and glows */
+#newGameButton:hover {
+  background: linear-gradient(135deg, #9b4dff, #5a189a); /* Slightly brighter on hover */
+  transform: translateY(-2px); /* Lifts the button up */
+  box-shadow: 0 6px 20px rgba(114, 9, 183, 0.6); /* Stronger glow */
+}
+
+/* Active Effect: Simulates a physical press */
+#newGameButton:active {
+  transform: translateY(1px); /* Pushes down when clicked */
+  box-shadow: 0 2px 10px rgba(114, 9, 183, 0.4);
+}
 
 .gameboard {
   display: grid; /* Activates the grid layout engine */
@@ -19,7 +60,7 @@ html, body {
 }
 
 .grid-item {
-  background-color: #3498db;
+  background-color: #34d3db;
             color: #ffffff;
             font-family: Arial, sans-serif;
             font-size: 48px;
@@ -62,3 +103,82 @@ html, body {
 .grid-item[data-state="disabled"]:hover {
   cursor: not-allowed; 
 }  */
+
+
+#game-status {
+  text-align: center;
+}
+
+/* Container for the whole form */
+.purple-form {
+  max-width: 400px;
+  margin: 0 auto; /* Centers the whole form horizontally */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Stacks the label on top of the text box */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px; /* Puts breathing room between the fields */
+}
+
+/* Styles the labels */
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a00e0; /* Matches the deep purple of the button gradient */
+  margin-bottom: 8px; /* Gap between label and input */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Styles the text inputs to match the button's clean aesthetic */
+.input-group input {
+  padding: 14px 20px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 50px; /* Matches the round/pill shape of the button */
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fcfbfe; /* Subtle purple-tinted white background */
+}
+
+/* Focused state: The box glows purple when you click into it */
+.input-group input:focus {
+  border-color: #8e2de2; /* Matches the bright purple gradient start */
+  box-shadow: 0 0 10px rgba(142, 45, 226, 0.2); /* Soft purple glow */
+  background-color: #ffffff;
+}
+
+/* (Include your existing .pretty-purple-btn styles below) */
+.pretty-purple-btn {
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(114, 9, 183, 0.4);
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%; /* Makes the button stretch across the full form width */
+}
+
+.pretty-purple-btn:hover {
+  background: linear-gradient(135deg, #9b4dff, #5a189a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(114, 9, 183, 0.6);
+}
+
+.pretty-purple-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(114, 9, 183, 0.4);
+}
